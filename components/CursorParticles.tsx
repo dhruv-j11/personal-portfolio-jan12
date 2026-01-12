@@ -20,9 +20,10 @@ export default function CursorParticles() {
   const containerRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number>()
 
-  const colors = ['#FFFFFF', '#00FFFF', '#0080FF', '#BF00FF'] // White, Aqua, Blue, Purple
-
   useEffect(() => {
+    // Colors array defined inside useEffect to avoid dependency warning
+    const colors = ['#FFFFFF', '#00FFFF', '#0080FF', '#BF00FF'] // White, Aqua, Blue, Purple
+    
     // Initialize particles
     const initialParticles: Particle[] = Array.from({ length: 40 }, (_, i) => ({
       id: i,

@@ -47,7 +47,7 @@ export default function Contact() {
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
           className="text-xl md:text-2xl text-center text-white/70 mb-16 px-4"
         >
-          Wanna talk?    Reach out somewhere below!
+          Wanna talk? Reach out somewhere below!
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -85,7 +85,6 @@ export default function Contact() {
                    }}
               />
               <div className="relative z-10">
-                <div className="text-4xl mb-4">{link.icon}</div>
                 <h3 className="text-2xl font-bold mb-2">{link.name}</h3>
                 {link.name === 'Email' && (
                   <p className="text-white/60 text-sm break-all">{contactInfo.email}</p>
