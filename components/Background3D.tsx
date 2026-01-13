@@ -19,7 +19,7 @@ function ParticleField() {
   const colors = ['#00FFFF', '#0080FF', '#FF00FF', '#FF0080'] // Aqua, Blue, Purple, Pink
 
   const particles = useMemo(() => 
-    Array.from({ length: particleCount }, (_, i) => ({
+    Array.from({ length: particleCount}, (_, i) => ({
       id: i,
       x: (Math.random() - 0.5) * 40,
       y: (Math.random() - 0.5) * 40,
@@ -27,8 +27,7 @@ function ParticleField() {
       speed: Math.random() * 0.01 + 0.005,
       color: colors[Math.floor(Math.random() * colors.length)],
       initialY: (Math.random() - 0.5) * 40,
-    })),
-    [particleCount]
+    })), [particleCount]
   )
 
   return (
