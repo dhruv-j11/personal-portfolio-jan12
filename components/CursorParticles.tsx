@@ -24,8 +24,9 @@ export default function CursorParticles() {
     // Colors array defined inside useEffect to avoid dependency warning
     const colors = ['#FFFFFF', '#00FFFF', '#0080FF', '#BF00FF'] // White, Aqua, Blue, Purple
     
-    // Initialize particles
-    const initialParticles: Particle[] = Array.from({ length: 40 }, (_, i) => ({
+    // Initialize particles - reduced for performance
+    const particleCount = window.innerWidth < 768 ? 15 : 25
+    const initialParticles: Particle[] = Array.from({ length: particleCount }, (_, i) => ({
       id: i,
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -58,9 +59,9 @@ export default function CursorParticles() {
           const force = Math.min(100 / (distance + 1), 2)
           const angle = Math.atan2(dy, dx)
 
-          // Update velocity with smooth interpolation
-          const newVx = particle.vx * 0.7 + Math.cos(angle) * force * 0.1
-          const newVy = particle.vy * 0.7 + Math.sin(angle) * force * 0.1
+          // Update velocity with smooth interpolation - optimized
+          const newVx = particle.vx * 0.85 + Math.cos(angle) * force * 0.05
+          const newVy = particle.vy * 0.85 + Math.sin(angle) * force * 0.05
 
           // Update position
           const newX = particle.x + newVx
@@ -99,9 +100,9 @@ export default function CursorParticles() {
       style={{ mixBlendMode: 'screen' }}
     >
       {particles.map((particle) => (
-        <motion.div
+        <div
           key={particle.id}
-          className="absolute rounded-full blur-sm"
+          className="absolute rounded-full blur-sm transition-opacity duration-100"
           style={{
             left: particle.x,
             top: particle.y,
@@ -110,15 +111,6 @@ export default function CursorParticles() {
             backgroundColor: particle.color,
             opacity: particle.opacity,
             boxShadow: `0 0 ${particle.size * 2}px ${particle.color}`,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [particle.opacity, particle.opacity * 1.5, particle.opacity],
-          }}
-          transition={{
-            duration: 2 + Math.random() * 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
           }}
         />
       ))}

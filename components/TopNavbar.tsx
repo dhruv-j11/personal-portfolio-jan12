@@ -49,21 +49,14 @@ export default function TopNavbar() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-25 py-6 pr-8 md:pr-16 lg:pr-24">
+    <nav className="fixed top-0 left-0 right-0 z-[100] py-6 pr-8 md:pr-16 lg:pr-24">
       <div className="flex justify-end w-full">
         <div className="flex gap-2 md:gap-4">
           {navItems.map((item) => (
-            <motion.button
+            <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: navItems.indexOf(item) * 0.1 }}
-              whileHover={{ 
-                scale: 1.1,
-                transition: { duration: 0.2 }
-              }}
-              className={`relative px-4 md:px-6 py-2 md:py-3 rounded-xl text-sm md:text-base font-medium transition-all duration-300 ${
+              className={`relative px-4 md:px-6 py-2 md:py-3 rounded-xl text-sm md:text-base font-medium transition-all duration-100 hover:scale-105 ${
                 activeSection === item.id
                   ? 'text-white'
                   : 'text-white/30 hover:text-white/80'
@@ -71,13 +64,9 @@ export default function TopNavbar() {
             >
               {item.name}
               {activeSection === item.id && (
-                <motion.div
-                  layoutId="activeNavIndicator"
-                  className="absolute inset-0 rounded-xl bg-white/10 border border-white/20"
-                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-                />
+                <div className="absolute inset-0 rounded-xl bg-white/10 border border-white/20" />
               )}
-            </motion.button>
+            </button>
           ))}
         </div>
       </div>

@@ -28,50 +28,24 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="min-h-screen py-20 px-4 md:px-8 flex items-center">
-      <div className="max-w-4xl mx-auto w-full">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-5xl md:text-7xl font-bold mb-8 text-center"
-        >
+    <section id="contact" className="min-h-screen py-8 px-4 md:px-8 flex items-center">
+      <div className="max-w-7xl mx-auto w-full">
+        <h2 className="text-5xl md:text-7xl font-bold mb-8 text-center">
           Contact
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
-          className="text-xl md:text-2xl text-center text-white/70 mb-16 px-4"
-        >
+        <p className="text-xl md:text-2xl text-center text-white/70 mb-16 px-4">
           Wanna talk? Reach out somewhere below!
-        </motion.p>
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {socialLinks.map((link, index) => (
-            <motion.a
+            <a
               key={link.name}
               href={link.url}
               target={link.name !== 'Email' ? '_blank' : undefined}
               rel={link.name !== 'Email' ? 'noopener noreferrer' : undefined}
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1]
-              }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -5,
-                transition: { duration: 0.3 }
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="glass-strong rounded-2xl p-8 group relative overflow-hidden cursor-pointer"
+              className="glass-strong rounded-2xl p-8 group relative overflow-hidden cursor-pointer hover:scale-[1.01] transition-all duration-100"
             >
               <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-20 transition-opacity duration-300" 
                    style={{
@@ -89,17 +63,12 @@ export default function Contact() {
                 {link.name === 'Email' && (
                   <p className="text-white/60 text-sm break-all">{contactInfo.email}</p>
                 )}
-                <div className="mt-4 flex items-center gap-2 text-white/40 group-hover:text-white/80 transition-colors duration-300">
+                <div className="mt-4 flex items-center gap-2 text-white/40 group-hover:text-white/80 transition-colors duration-100">
                   <span className="text-sm">Visit</span>
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  >
-                    →
-                  </motion.span>
+                  <span>→</span>
                 </div>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
       </div>

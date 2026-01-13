@@ -4,41 +4,15 @@ import { useRef, useState, useEffect, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Mesh } from 'three'
 
-function FloatingShape() {
-  const meshRef = useRef<Mesh>(null)
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += 0.001
-      meshRef.current.rotation.y += 0.002
-      meshRef.current.position.y = Math.sin(state.clock.elapsedTime) * 0.5
-    }
-  })
-
-  return (
-    <mesh ref={meshRef} position={[0, 0, 0]}>
-      <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial 
-        color="#ffffff" 
-        emissive="#00FFFF"
-        emissiveIntensity={0.1}
-        opacity={0.5}
-        transparent
-        wireframe
-      />
-    </mesh>
-  )
-}
-
 function ParticleField() {
-  const [particleCount, setParticleCount] = useState(300)
+  const [particleCount, setParticleCount] = useState(50)
   
   useEffect(() => {
-    // Reduce particles on mobile for better performance
+    // Reduce particles for better performance
     if (window.innerWidth < 768) {
-      setParticleCount(100)
+      setParticleCount(20)
     } else if (window.innerWidth < 1024) {
-      setParticleCount(200)
+      setParticleCount(35)
     }
   }, [])
 
@@ -85,23 +59,12 @@ function FloatingParticle({
   
   useFrame((state) => {
     if (meshRef.current) {
-      // Continuous floating motion that never stops - particles always visible
+      // Simplified floating motion for better performance
       const time = state.clock.elapsedTime
-      const floatY = Math.sin(time * speed + x * 0.1) * 10
-      const floatX = Math.cos(time * speed * 0.7 + z * 0.1) * 7
-      const floatZ = Math.sin(time * speed * 0.5 + y * 0.1) * 3
+      const floatY = Math.sin(time * speed * 0.5 + x * 0.1) * 2
       
       meshRef.current.position.y = initialY + floatY
-      meshRef.current.position.x = x + floatX
-      meshRef.current.position.z = z + floatZ
-      
-      meshRef.current.rotation.x += speed * 0.5
-      meshRef.current.rotation.y += speed * 0.3
-      meshRef.current.rotation.z += speed * 0.2
-      
-      // Pulse effect with color variation
-      const scale = 1 + Math.sin(time * speed * 3) * 0.9
-      meshRef.current.scale.setScalar(scale)
+      meshRef.current.rotation.y += speed * 0.1
     }
   })
 
@@ -143,7 +106,6 @@ export default function Background3D() {
         <ambientLight intensity={1.2} />
         <pointLight position={[10, 10, 10]} intensity={0.8} />
         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#FF00FF" />
-        <FloatingShape />
         <ParticleField />
       </Canvas>
     </div>
