@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Analytics } from "@vercel/analytics/next"
 import './globals.css'
 
+// redeploy-trigger
+
 export const metadata: Metadata = {
   title: 'Dhruv Joshi',
   description: 'Portfolio of Dhruv Joshi - Software and Product Builder',
